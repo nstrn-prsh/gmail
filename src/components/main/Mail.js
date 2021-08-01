@@ -2,7 +2,7 @@ import './mail.css'
 
 function Mail() {
     return (
-        <div>
+        <div className="mail">
             
         </div>
     )
