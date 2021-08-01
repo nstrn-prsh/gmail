@@ -11,6 +11,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import { IconButton, Checkbox } from "@material-ui/core";
 import Section from "./Section";
+import EmailRow from "./EmailRow";
 
 function EmailList() {
      return (
@@ -64,7 +65,20 @@ function EmailList() {
                </div>
 
                {/* email rows */}
-               <div className='emailList__list'></div>
+               <div className='emailList__list'>
+                    <EmailRow
+                         title='twitch'
+                         subject='hey follow a streamer'
+                         description='this is a test'
+                         time='10pm'
+                    />
+                    <EmailRow
+                         title='twitch'
+                         subject='hey follow a streamer'
+                         description='this is a test'
+                         time='10pm'
+                    />
+               </div>
           </div>
      );
 }
