@@ -1,8 +1,8 @@
 import "./app.css";
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/Sidebar";
-import Mail from "./components/main/Mail";
-import EmailList from "./components/main/EmailList";
+import Mail from "./components/main/mail/Mail";
+import EmailList from "./components/main/emailList/EmailList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
