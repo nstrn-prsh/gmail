@@ -19,4 +19,4 @@ export const { openSendMessage, closeSendMessage } = mailReducer.actions;
 export default mailReducer.reducer;
 
 export const selectSendMessageIsOpen = (state) =>
-     state.mail.selectSendMessageIsOpen;
+     state.mail.sendMessageIsOpen;
