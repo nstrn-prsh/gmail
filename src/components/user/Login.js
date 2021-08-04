@@ -3,7 +3,7 @@ import GLogo from "./../../assets/gmail-logo.png";
 import { Button } from "@material-ui/core";
 import { auth, provider } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
-import { login } from "../../features/userSLice";
+import { login } from "../../features/userSlice";
 
 function Login() {
      const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function Login() {
                     <Button
                          variant='contained'
                          color='primary'
-                         onCLick={signIn}
+                         onClick={signIn}
                     >
                          LOGIN
                     </Button>

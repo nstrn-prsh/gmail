@@ -5,14 +5,35 @@ import Mail from "./components/main/mail/Mail";
 import EmailList from "./components/main/emailList/EmailList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SendMail from "./components/compose/SendMail";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectSendMessageIsOpen } from "./features/mailSlice";
-import { selectUser } from "./features/userSlice";
-import Login from './components/user/Login';
+import { login, selectUser } from "./features/userSlice";
+import Login from "./components/user/Login";
+import { useEffect } from "react";
+import { auth } from "./utils/firebase";
 
 function App() {
      const sendMessageIsOpen = useSelector(selectSendMessageIsOpen);
      const user = useSelector(selectUser);
+     const dispatch = useDispatch();
+
+     useEffect(() => {
+          auth.onAuthStateChanged((user) => {
+               // the user is logged in
+               if (user) {
+                    dispatch(
+                         login({
+                              displayName: user.displayName,
+                              email: user.email,
+                              photoUrl: user.photoURL,
+                         })
+                    );
+               }
+               // the user is NOT logged in
+               else {
+               }
+          });
+     }, []);
 
      return (
           <Router>
