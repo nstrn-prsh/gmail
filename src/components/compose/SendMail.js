@@ -17,7 +17,7 @@ function SendMail() {
      } = useForm();
 
      const onSubmit = (formData) => {
-          console.log(formData);
+          // console.log(formData);
           // push sth to database
           db.collection("emails").add({
                to: formData.to,
