@@ -11,7 +11,7 @@ import NoteIcon from "@material-ui/icons/Note";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export const sideOption = [
-    { id: 1, icon: InboxIcon, title: "Inbox", number: 54, selected: true },
+    { id: 1, icon: InboxIcon, title: "Inbox", number: 54, selected: false },
     { id: 2, icon: StarIcon, title: "Starred", number: 2, selected: false },
     {
          id: 3,
@@ -27,7 +27,7 @@ export const sideOption = [
          number: 15,
          selected: false,
     },
-    { id: 5, icon: NearMeIcon, title: "Sent", number: 37, selected: false },
+    { id: 5, icon: NearMeIcon, title: "Sent", number: 37, selected: true },
     { id: 6, icon: NoteIcon, title: "Drafts", number: 6, selected: false },
     {
          id: 7,
