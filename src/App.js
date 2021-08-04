@@ -29,9 +29,6 @@ function App() {
                          })
                     );
                }
-               // the user is NOT logged in
-               else {
-               }
           });
      }, []);
 
