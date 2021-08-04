@@ -4,6 +4,8 @@ import { Button } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { closeSendMessage } from "../../features/mailSlice";
+import firebase from "firebase";
+import { db } from "../../utils/firebase";
 
 function SendMail() {
      const dispatch = useDispatch();
@@ -14,7 +16,18 @@ function SendMail() {
           formState: { errors },
      } = useForm();
 
-     const onSubmit = (formData) => console.log(formData);
+     const onSubmit = (formData) => {
+          console.log(formData);
+          // push sth to database
+          db.collection("emails").add({
+               to: formData.to,
+               subject: formData.subject,
+               message: formData.message,
+               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+
+          dispatch(closeSendMessage());
+     };
      //  toye formData harchi ke to input ha neveshtim gharar dare
 
      return (
@@ -31,7 +44,7 @@ function SendMail() {
                     {/* age input haye required khali bashan submit anjam nemishe */}
                     <input
                          name='to'
-                         type='text'
+                         type='email'
                          placeholder='to'
                          {...register("to", { required: true })}
                     />

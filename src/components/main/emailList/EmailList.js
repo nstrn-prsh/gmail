@@ -3,12 +3,30 @@ import InboxIcon from "@material-ui/icons/Inbox";
 import PeopleIcon from "@material-ui/icons/People";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import EmailListIcons from "./EmailListIcons";
-import Section from './../section/Section';
-import EmailRow from './../emailRow/EmailRow';
+import Section from "./../section/Section";
+import EmailRow from "./../emailRow/EmailRow";
+import { useState, useEffect } from "react";
+import { db } from "./../../../utils/firebase";
 
 function EmailList() {
+     const [emails, setEmails] = useState([]);
+
+     useEffect(() => {
+          db.collection("emails")
+               .orderBy("timestamp", "desc")
+               // har taghiti to db ijad shod setEmails anjam beshe dobare
+               .onSnapshot((snapshot) =>
+                    setEmails(
+                         snapshot.docs.map((doc) => ({
+                              id: doc.id,
+                              data: doc.data(),
+                         }))
+                    )
+               );
+     }, []);
+
      return (
-          <div className='emailList'> 
+          <div className='emailList'>
                {/* top section hiding */}
                <EmailListIcons />
 
@@ -30,18 +48,23 @@ function EmailList() {
 
                {/* email rows */}
                <div className='emailList__list'>
-                    <EmailRow
-                         title='twitch'
-                         subject='hey follow a streamer'
-                         description='this is a test'
-                         time='10pm'
-                    />
-                    <EmailRow
-                         title='twitch'
-                         subject='hey follow a streamer'
-                         description='this is a test'
-                         time='10pm'
-                    />
+                    {emails.map(
+                         ({
+                              id,
+                              data: { to, subject, message, timestamp },
+                         }) => (
+                              <EmailRow
+                                   key={id}
+                                   id={id}
+                                   title={to}
+                                   subject={subject}
+                                   description={message}
+                                   time={new Date(
+                                        timestamp?.seconds * 1000
+                                   ).toUTCString()}
+                              />
+                         )
+                    )}
                </div>
           </div>
      );
