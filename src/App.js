@@ -5,32 +5,39 @@ import Mail from "./components/main/mail/Mail";
 import EmailList from "./components/main/emailList/EmailList";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SendMail from "./components/compose/SendMail";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { selectSendMessageIsOpen } from "./features/mailSlice";
+import { selectUser } from "./features/userSlice";
+import Login from './components/user/Login';
 
 function App() {
-     const sendMessageIsOpen = useSelector(selectSendMessageIsOpen)
+     const sendMessageIsOpen = useSelector(selectSendMessageIsOpen);
+     const user = useSelector(selectUser);
 
      return (
           <Router>
-               <div className='app'>
-                    <Header />
+               {!user ? (
+                    <Login />
+               ) : (
+                    <div className='app'>
+                         <Header />
 
-                    <div className='app__body'>
-                         <Sidebar />
+                         <div className='app__body'>
+                              <Sidebar />
 
-                         <Switch>
-                              <Route path='/mail'>
-                                   <Mail />
-                              </Route>
-                              <Route path='/'>
-                                   <EmailList />
-                              </Route>
-                         </Switch>
+                              <Switch>
+                                   <Route path='/mail'>
+                                        <Mail />
+                                   </Route>
+                                   <Route path='/'>
+                                        <EmailList />
+                                   </Route>
+                              </Switch>
+                         </div>
+
+                         {sendMessageIsOpen && <SendMail />}
                     </div>
-
-                    {sendMessageIsOpen && <SendMail />}
-               </div>
+               )}
           </Router>
      );
 }
